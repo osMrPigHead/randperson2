@@ -1,0 +1,19 @@
+{
+  "ssr": {
+    "count": 0,
+    "probability": 0.01,
+    "lift": 60,
+    "max": 80,
+    "saveExcluded": false,
+    "list": [
+      "SSR"
+    ]
+  },
+  "list": [
+    [
+      "Badge",
+      "Name"
+    ]
+  ],
+  "saveExcluded": false
+}

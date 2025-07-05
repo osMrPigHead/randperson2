@@ -1,0 +1,93 @@
+html {
+    font-size: 2.75vw;
+}
+body {
+    app-region: drag;
+    user-select: none;
+    background-color: #0000;
+    opacity: 0;
+}
+button, input, textarea {
+    app-region: no-drag;
+}
+#bg {
+    border-radius: 2rem;
+    box-shadow: 0 0 .5rem #0007;
+}
+#placeholder {
+    height: 100vh;
+    width: 100vw;
+}
+.modal-backdrop {
+    border-radius: 2rem;
+    margin: .5rem;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+}
+.modal-dialog {
+    width: 75vw;
+}
+
+#window-op .btn:first-child {
+    border-radius: 1rem 0 0 1rem !important;
+}
+#window-op .btn:last-child {
+    border-radius: 0 1rem 1rem 0 !important;
+}
+.icon {
+    font-size: 1.125rem;
+}
+
+#logo {
+    width: 4rem;
+    height: 4rem;
+}
+
+#number {
+    width: 4rem;
+    margin: 5rem 0 5rem 1.5rem;
+    border-radius: 1rem;
+}
+.btn-number {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 100%;
+}
+#buttons {
+    padding: 0 2rem;
+    grid-template-columns: 2fr 4fr 4fr 2fr;
+    grid-template-rows: 1.5fr 1fr .5fr;
+    grid-column-gap: .25rem;
+    grid-row-gap: .25rem;
+}
+#buttons button {
+    border-radius: .75rem !important;
+}
+#start-button {
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+#edit-button {
+    grid-column-start: 2;
+}
+#ssr-button {
+    grid-column-start: 3;
+}
+#hint {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    background-image: linear-gradient(to right,
+    rgba(0, 0, 0, 0), rgba(236, 185, 28, 90%), rgba(0, 0, 0, 0));
+}
+
+#edit-list {
+    height: 25vw;
+}
+#ssr-list {
+    height: 10vw;
+}
+textarea {
+    resize: none;
+}

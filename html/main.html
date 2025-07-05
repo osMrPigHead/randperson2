@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>随机选人</title>
+    <link rel="icon" href="../image/icon.ico">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/main.js"></script>
+</head>
+<body class="text-center">
+<div id="placeholder"></div>
+<div id="bg" class="z-0 position-fixed top-0 bottom-0 start-0 end-0 m-2 bg-white"></div>
+<div id="window-op" class="z-1 position-fixed end-0 top-0 m-4 btn-group">
+    <button class="btn btn-outline-secondary" id="hide">
+        <i class="fa-solid fa-minus icon"></i>
+        隐藏
+    </button>
+    <button class="btn btn-outline-danger" id="exit">
+        <i class="fa-solid fa-xmark icon"></i>
+        退出
+    </button>
+</div>
+<main class="z-0 position-absolute top-0 bottom-0 start-0 end-0 p-5 text-center">
+    <div class="mt-2 d-flex align-items-center justify-content-center h1">
+        <img src="../image/logo.png" alt="logo" id="logo">
+        <span class="ms-2">随机选人</span>
+    </div>
+    <div id="number" class="position-fixed top-0 bottom-0 start-0 card">
+        <div class="card-header small">连抽</div>
+        <div class="card-body p-0 d-flex flex-column gap-2 align-items-center justify-content-center">
+            <button id="number-1" class="btn-number btn btn-success">1</button>
+            <button id="number-2" class="btn-number btn btn-outline-success">2</button>
+            <button id="number-3" class="btn-number btn btn-outline-success">3</button>
+            <button id="number-4" class="btn-number btn btn-outline-success">4</button>
+            <button id="number-5" class="btn-number btn btn-outline-success">5</button>
+        </div>
+    </div>
+    <div class="my-4 display-2">
+        <span id="name">会是谁呢</span>
+        <span id="ssr" class="d-none badge rounded-pill bg-warning">SSR</span>
+        <span id="r" class="badge rounded-pill bg-secondary">???</span>
+        <span id="err" class="d-none badge rounded-pill bg-danger">ERROR</span>
+    </div>
+    <div class="d-grid" id="buttons">
+        <button class="btn btn-success btn-lg" id="start-button">
+            <i class="fa-solid fa-play"></i>
+            启动！
+        </button>
+        <button class="btn btn-outline-success btn-lg" id="edit-button"
+                data-bs-toggle="modal" data-bs-target="#edit">
+            编辑名单
+        </button>
+        <button class="btn btn-outline-success btn-lg" id="ssr-button"
+                data-bs-toggle="modal" data-bs-target="#edit-ssr">
+            编辑 SSR
+        </button>
+        <div class="m-0" id="hint"><span id="ssr-count"></span> 抽必出 SSR</div>
+    </div>
+</main>
+
+<div class="modal fade" id="edit">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑名单</h4>
+            </div>
+            <div class="modal-body pb-2">
+                <textarea class="form-control" id="edit-list"></textarea>
+            </div>
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input float-none" type="checkbox" id="save-excluded">
+                <label class="form-check-label" for="save-excluded" data-bs-toggle="tooltip"
+                       title="下次使用时仍不会选中本次已选过的人">留存选人记录</label>
+                <button type="button" class="btn btn-outline-success btn-sm"
+                        id="clear-excluded">清除选人记录</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="edit-save"
+                        data-bs-dismiss="modal">保存</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit-ssr">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑 SSR</h4>
+            </div>
+            <div class="modal-body pb-2">
+                <div class="input-group">
+                    <label class="input-group-text" for="probability">SSR 概率</label>
+                    <input class="form-control" type="number" max="100" min="0" id="probability">
+                    <span class="input-group-text">%</span>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-text" for="ssr-max">保底次数</label>
+                    <input class="form-control" type="number" min="0" id="ssr-max">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-text" for="ssr-lift">概率提升次数</label>
+                    <input class="form-control" type="number" min="0" id="ssr-lift">
+                </div>
+                <textarea class="form-control" id="ssr-list"></textarea>
+            </div>
+            <div class="my-1">
+                <button type="button" class="btn btn-outline-success btn-sm"
+                        id="clear-ssr">清除抽卡次数</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="ssr-save"
+                        data-bs-dismiss="modal">保存</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    for (const e of $('[data-bs-toggle="tooltip"]')) new bootstrap.Tooltip(e);
+</script>
+</body>
+</html>
